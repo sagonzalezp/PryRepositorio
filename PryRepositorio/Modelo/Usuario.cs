@@ -9,17 +9,17 @@ namespace PryRepositorio.Modelo
     {
         String nombreUsr;
         String contrasena;
-        String nivelAccesso;
+        String tipo;
 
-        public Usuario(string nombreUsr, string contrasena, string nivelAccesso)
+        public Usuario(string nombreUsr, string contrasena, string tipo)
         {
             this.nombreUsr = nombreUsr;
             this.contrasena = contrasena;
-            this.nivelAccesso = nivelAccesso;
+            this.tipo = tipo;
         }
 
         public string NombreUsr { get => nombreUsr; set => nombreUsr = value; }
         public string Contrasena { get => contrasena; set => contrasena = value; }
-        public string NivelAccesso { get => nivelAccesso; set => nivelAccesso = value; }
+        public string Tipo { get => tipo; set => tipo = value; }
     }
 }

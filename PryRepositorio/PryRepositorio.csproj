@@ -72,28 +72,27 @@
     <Content Include="App_Data\BDRepositorio_log.ldf">
       <DependentUpon>BDRepositorio.mdf</DependentUpon>
     </Content>
-    <Content Include="FormUsuarios.aspx" />
-    <Content Include="FrmArea1.aspx" />
+    <Content Include="FrmUsuarios.aspx" />
+    <Content Include="FrmArea.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
-    <Content Include="FrmAreas.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controlador\Conexion.cs" />
     <Compile Include="Controlador\ControlArea.cs" />
-    <Compile Include="FormUsuarios.aspx.cs">
-      <DependentUpon>FormUsuarios.aspx</DependentUpon>
+    <Compile Include="FrmUsuarios.aspx.cs">
+      <DependentUpon>FrmUsuarios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="FormUsuarios.aspx.designer.cs">
-      <DependentUpon>FormUsuarios.aspx</DependentUpon>
+    <Compile Include="FrmUsuarios.aspx.designer.cs">
+      <DependentUpon>FrmUsuarios.aspx</DependentUpon>
     </Compile>
-    <Compile Include="FrmArea1.aspx.cs">
-      <DependentUpon>FrmArea1.aspx</DependentUpon>
+    <Compile Include="FrmArea.aspx.cs">
+      <DependentUpon>FrmArea.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="FrmArea1.aspx.designer.cs">
-      <DependentUpon>FrmArea1.aspx</DependentUpon>
+    <Compile Include="FrmArea.aspx.designer.cs">
+      <DependentUpon>FrmArea.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -101,13 +100,6 @@
     <Compile Include="Modelo\Area.cs" />
     <Compile Include="Modelo\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FrmAreas.aspx.cs">
-      <DependentUpon>FrmAreas.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FrmAreas.aspx.designer.cs">
-      <DependentUpon>FrmAreas.aspx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,12 +1,35 @@
 ﻿CREATE TABLE USUARIOS(
-nombreUsr varchar(20) PRIMARY KEY,
-contrasena varchar(40) not null,
-nivelAccesso int not null
+nombreUsr VARCHAR(20),
+contrasena VARCHAR(40),
+tipo VARCHAR(20),
+PRIMARY KEY (nombreUsr),
 )
 
-INSERT INTO USUARIOS VALUES('SERGIO', '1020458694', 1)
+CREATE TABLE AREA (
+idArea varchar(10) primary key,
+nombre varchar(50) not null,
+fkArea varchar(10),
+CONSTRAINT FK_AREA FOREIGN KEY (fkArea)
+REFERENCES AREA(idArea)
+)
 
-INSERT INTO USUARIOS VALUES('hugo', '123', 2)
-INSERT INTO USUARIOS VALUES('paco', '123', 3)
-INSERT INTO USUARIOS VALUES('luis', '123', 2)
-INSERT INTO USUARIOS VALUES('donald', '123', 1)
+CREATE TABLE MSJERROR(
+mensaje VERCHAR(MAX) NOT NULL
+)
+
+--CREATE PROCEDURE [dbo].[procInsertArea]
+--@idArea varchar(10),
+--@nombre varchar(50),
+--@fkArea varchar(10)
+--AS
+--BEGIN TRANSACTION 
+--     BEGIN TRY 
+--	 INSERT INTO AREA(idArea,nombre,fkArea)
+--	 VALUES(@idArea,@nombre,@fkArea)
+--	 COMMIT TRANSACTION
+--	 END TRY
+--	 BEGIN CATCH 
+--	 ROLLBACK TRANSACTION
+--	 INSERT INTO msjError (mensaje)
+--	 values (ERROR_MESSAGE())
+--	 END CATCH

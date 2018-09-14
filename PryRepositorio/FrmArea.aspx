@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FrmArea1.aspx.cs" Inherits="PryRepositorio.FrmArea1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FrmArea.aspx.cs" Inherits="PryRepositorio.FrmArea1" %>
 
 <!DOCTYPE html>
 
