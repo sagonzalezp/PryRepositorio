@@ -1,0 +1,12 @@
+﻿CREATE TABLE USUARIOS(
+nombreUsr varchar(20) PRIMARY KEY,
+contrasena varchar(40) not null,
+nivelAccesso int not null
+)
+
+INSERT INTO USUARIOS VALUES('SERGIO', '1020458694', 1)
+
+INSERT INTO USUARIOS VALUES('hugo', '123', 2)
+INSERT INTO USUARIOS VALUES('paco', '123', 3)
+INSERT INTO USUARIOS VALUES('luis', '123', 2)
+INSERT INTO USUARIOS VALUES('donald', '123', 1)
