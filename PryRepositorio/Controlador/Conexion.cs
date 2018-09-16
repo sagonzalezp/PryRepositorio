@@ -9,50 +9,46 @@ using System.Data; // Lo uso para crear el metodo ejecutarConsulta que retorna u
 namespace PryRepositorio.Controlador
 {
     class Conexion
-    {//namespace estructura que almacena namespace o clases
-        SqlConnection objcon;//declarando atributo
-        SqlCommand objComm;
-        SqlDataAdapter objAdapt;
+    {
         String cadenaConexion;
+        SqlConnection objConnection;
+        SqlCommand objCommand;
+        SqlDataAdapter objAdapter;
+        
         String mensaje;
-
-        public string Mensaje { get => mensaje; set => mensaje = value; }
-        public SqlConnection Objcon { get => objcon; set => objcon = value; }
-
-        public Conexion(String cadenaConexion)
-        {
-            objcon = null;
-            objComm = null;
-            objAdapt = null;
-            this.cadenaConexion = cadenaConexion;
-            mensaje = "";
-           
-
-        }
-
-        public Conexion(String cadenaConexion,SqlConnection objcon)
-        {
-            this.objcon = objcon;
-            objComm = null;
-            objAdapt = null;
-            this.cadenaConexion = cadenaConexion;
-        }
 
         public Conexion()
         {
-            this.objcon = null;
-            objComm = null;
-            objAdapt = null;
-            this.cadenaConexion =null;
+            this.cadenaConexion = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=E:\repos\PryRepositorio\PryRepositorio\App_Data\BDRepositorio.mdf;Integrated Security=True";
+            this.objConnection = new SqlConnection(cadenaConexion);
+            this.objCommand = null;
+            this.objAdapter = null;
         }
+
+        public Conexion(SqlConnection objConnection, SqlCommand objCommand, SqlDataAdapter objAdapter, string cadenaConexion, string mensaje)
+        {
+            this.objConnection = objConnection;
+            this.objCommand = objCommand;
+            this.objAdapter = objAdapter;
+            this.cadenaConexion = cadenaConexion;
+            this.mensaje = mensaje;
+        }
+
+        public SqlConnection ObjConnection { get => objConnection; set => objConnection = value; }
+        public SqlCommand ObjCommand { get => objCommand; set => objCommand = value; }
+        public SqlDataAdapter ObjAdapter { get => objAdapter; set => objAdapter = value; }
+        public String CadenaConexion { get => cadenaConexion; set => cadenaConexion = value; }
+        public String Mensaje { get => mensaje; set => mensaje = value; }
+
+        
 
         public String abrirConexion()
         {
             
             try
             {
-                objcon = new SqlConnection(cadenaConexion);//declarando clase
-                objcon.Open();
+                objConnection = new SqlConnection(CadenaConexion);//declarando clase
+                objConnection.Open();
 
             }
             catch (Exception objExp)
@@ -69,7 +65,7 @@ namespace PryRepositorio.Controlador
             
             try
             {
-                objcon.Close();
+                objConnection.Close();
 
             }
             catch (Exception objExp)
@@ -86,8 +82,8 @@ namespace PryRepositorio.Controlador
             try
             {
                
-                objComm = new SqlCommand(comandoSql, objcon);//argumento dato que se envia
-                objComm.ExecuteNonQuery();
+                ObjCommand = new SqlCommand(comandoSql, objConnection);//argumento dato que se envia
+                ObjCommand.ExecuteNonQuery();
             }
             catch (Exception objExp)
             {
@@ -102,8 +98,8 @@ namespace PryRepositorio.Controlador
             DataSet objDs = new DataSet();
             try
             {
-                objAdapt = new SqlDataAdapter(consultaSql, objcon); //SqlDataAdapter llena el DataSet
-                objAdapt.Fill(objDs);
+                ObjAdapter = new SqlDataAdapter(consultaSql, objConnection); //SqlDataAdapter llena el DataSet
+                ObjAdapter.Fill(objDs);
 
             }
             catch (Exception objExp) // como este metodo ya no retorna mensaje

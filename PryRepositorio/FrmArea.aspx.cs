@@ -45,6 +45,36 @@ namespace PryRepositorio
             {
                 Label1.Text = objExc.Message;
             }
+        }
+
+        protected void btnModificar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                String idArea = txtArea.Text;
+                String nombre = txtNombre.Text;
+                String fkidArea = txtFkarea.Text;
+                String ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=E:\repos\PryRepositorio\PryRepositorio\App_Data\BDRepositorio.mdf;Integrated Security=True";
+                SqlConnection cnn = new SqlConnection(ConnectionString);
+                SqlCommand cmd = new SqlCommand("procModificarArea", cnn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("@idArea", SqlDbType.VarChar, 10);
+                cmd.Parameters.Add("@nombre", SqlDbType.VarChar, 50);
+                cmd.Parameters.Add("@fkArea", SqlDbType.VarChar, 10);
+
+                cmd.Parameters["@idArea"].Value = idArea;
+                cmd.Parameters["@nombre"].Value = nombre;
+                cmd.Parameters["@fkArea"].Value = fkidArea;
+
+                cnn.Open();
+                cmd.ExecuteNonQuery();
+                cnn.Close();
             }
+            catch (Exception objExc)
+            {
+                Label1.Text = objExc.Message;
+            }
+        }
     }
 }

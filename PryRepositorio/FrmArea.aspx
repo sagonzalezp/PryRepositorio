@@ -77,7 +77,7 @@
                     <asp:Button ID="btnConsultar" runat="server" Text="Consultar" style="margin-left: 0px" />
                     </td>
                         <td class="auto-style9">
-                    <asp:Button ID="btnModificar" runat="server" Text="Modificar" />
+                    <asp:Button ID="btnModificar" runat="server" Text="Modificar" OnClick="btnModificar_Click" />
                     </td>
                 <td class="auto-style11">
                     <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" />

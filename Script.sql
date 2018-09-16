@@ -33,3 +33,18 @@ mensaje VERCHAR(MAX) NOT NULL
 --	 INSERT INTO msjError (mensaje)
 --	 values (ERROR_MESSAGE())
 --	 END CATCH
+
+CREATE PROCEDURE [dbo].[procModificarArea]
+	@idArea varchar(10),
+	@nombre varchar(50),
+	@fkArea varchar(10)
+AS
+BEGIN TRANSACTION
+	BEGIN TRY
+		UPDATE AREA SET nombre = @nombre, fkArea = @fkArea WHERE idArea = @idArea;
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION
+		INSERT INTO MSJERROR values (ERROR_MESSAGE())
+	END CATCH
