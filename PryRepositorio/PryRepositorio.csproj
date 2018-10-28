@@ -72,20 +72,64 @@
     <Content Include="App_Data\BDRepositorio_log.ldf">
       <DependentUpon>BDRepositorio.mdf</DependentUpon>
     </Content>
-    <Content Include="FrmUsuarios.aspx" />
+    <Content Include="FormCargarMaterial.aspx" />
+    <Content Include="FrmAutor.aspx" />
+    <Content Include="FrmInicio.aspx" />
+    <Content Include="FrmLogin.aspx" />
     <Content Include="FrmArea.aspx" />
+    <Content Include="FrmMaterial.aspx" />
+    <Content Include="FrmRegistrarse.aspx" />
+    <Content Include="FrmUsuario.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Vista\bootstrap-3.3.7-dist\css\bootstrap-theme.css" />
+    <Content Include="Vista\bootstrap-3.3.7-dist\css\bootstrap-theme.min.css" />
+    <Content Include="Vista\bootstrap-3.3.7-dist\css\bootstrap.css" />
+    <Content Include="Vista\bootstrap-3.3.7-dist\css\bootstrap.min.css" />
+    <Content Include="Vista\bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Vista\bootstrap-3.3.7-dist\js\bootstrap.js" />
+    <Content Include="Vista\bootstrap-3.3.7-dist\js\bootstrap.min.js" />
+    <Content Include="Vista\bootstrap-3.3.7-dist\js\npm.js" />
+    <Content Include="Vista\CSS\StyleV1.css" />
+    <Content Include="Vista\imgMateriales\Fondo.jpg" />
+    <Content Include="Vista\salak401.PNG" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controlador\Conexion.cs" />
+    <Compile Include="Controlador\Connetion\Connection.cs" />
     <Compile Include="Controlador\ControlArea.cs" />
-    <Compile Include="FrmUsuarios.aspx.cs">
-      <DependentUpon>FrmUsuarios.aspx</DependentUpon>
+    <Compile Include="Controlador\ControlAutor.cs" />
+    <Compile Include="Controlador\ControlLogin.cs" />
+    <Compile Include="Controlador\ControlMaterial1.cs" />
+    <Compile Include="Controlador\controlMaterial.cs" />
+    <Compile Include="Controlador\ControlUsuario.cs" />
+    <Compile Include="Controlador\generic\Config.cs" />
+    <Compile Include="FormCargarMaterial.aspx.cs">
+      <DependentUpon>FormCargarMaterial.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FormCargarMaterial.aspx.designer.cs">
+      <DependentUpon>FormCargarMaterial.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAutor.aspx.cs">
+      <DependentUpon>FrmAutor.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="FrmUsuarios.aspx.designer.cs">
-      <DependentUpon>FrmUsuarios.aspx</DependentUpon>
+    <Compile Include="FrmAutor.aspx.designer.cs">
+      <DependentUpon>FrmAutor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FrmInicio.aspx.cs">
+      <DependentUpon>FrmInicio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FrmInicio.aspx.designer.cs">
+      <DependentUpon>FrmInicio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FrmLogin.aspx.cs">
+      <DependentUpon>FrmLogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FrmLogin.aspx.designer.cs">
+      <DependentUpon>FrmLogin.aspx</DependentUpon>
     </Compile>
     <Compile Include="FrmArea.aspx.cs">
       <DependentUpon>FrmArea.aspx</DependentUpon>
@@ -94,16 +138,50 @@
     <Compile Include="FrmArea.aspx.designer.cs">
       <DependentUpon>FrmArea.aspx</DependentUpon>
     </Compile>
+    <Compile Include="FrmMaterial.aspx.cs">
+      <DependentUpon>FrmMaterial.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FrmMaterial.aspx.designer.cs">
+      <DependentUpon>FrmMaterial.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FrmRegistrarse.aspx.cs">
+      <DependentUpon>FrmRegistrarse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FrmRegistrarse.aspx.designer.cs">
+      <DependentUpon>FrmRegistrarse.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FrmUsuario.aspx.cs">
+      <DependentUpon>FrmUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FrmUsuario.aspx.designer.cs">
+      <DependentUpon>FrmUsuario.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Modelo\Area.cs" />
+    <Compile Include="Modelo\Audiencia.cs" />
     <Compile Include="Modelo\Autor.cs" />
+    <Compile Include="Modelo\Formato.cs" />
+    <Compile Include="Modelo\Keyword.cs" />
+    <Compile Include="Modelo\Lenguaje.cs" />
+    <Compile Include="Modelo\Material.cs" />
     <Compile Include="Modelo\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="Vista\bootstrap-3.3.7-dist\css\bootstrap-theme.css.map" />
+    <Content Include="Vista\bootstrap-3.3.7-dist\css\bootstrap-theme.min.css.map" />
+    <Content Include="Vista\bootstrap-3.3.7-dist\css\bootstrap.css.map" />
+    <Content Include="Vista\bootstrap-3.3.7-dist\css\bootstrap.min.css.map" />
+    <Content Include="Vista\bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Vista\bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Vista\bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Vista\bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -112,8 +190,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="Vista\" />
+    <Folder Include="App_Data\Materiales\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

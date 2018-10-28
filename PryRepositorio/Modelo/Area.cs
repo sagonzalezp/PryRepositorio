@@ -24,9 +24,9 @@ namespace PryRepositorio.Modelo
 
         public Area()
         {
-            this.idArea = null;
-            this.nombre = null;
-            this.fkidArea = null;
+            this.idArea = "";
+            this.nombre = "";
+            this.fkidArea = "";
         }
 
        

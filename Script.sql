@@ -1,10 +1,12 @@
-﻿
+﻿GO
 CREATE TABLE USUARIOS(
 nombreUsr VARCHAR(20),
 contrasena VARCHAR(40),
 tipo VARCHAR(20),
 PRIMARY KEY (nombreUsr),
 );
+
+GO
 
 CREATE TABLE AREA (
 idArea varchar(10) primary key,
@@ -14,54 +16,82 @@ CONSTRAINT FK_AREA FOREIGN KEY (fkArea)
 REFERENCES AREA(idArea)
 );
 
-CREATE TABLE MSJERROR(
-mensaje VERCHAR(MAX) NOT NULL
-);
+GO
 
-CREATE TABLE [dbo].[AUTORES] (
-    [codigo] INT          NOT NULL,
+CREATE TABLE AUTORES (
+    [codigo] INT NOT NULL,
     [nombre] VARCHAR (50) NOT NULL,
     PRIMARY KEY CLUSTERED ([codigo] ASC)
 );
 
-CREATE TABLE [dbo].[MATERIAL] (
+GO
+
+
+CREATE TABLE MATERIAL (
     [idMaterial]        VARCHAR (10) NOT NULL,
     [titulo]            VARCHAR (30) NOT NULL,
     [descripcion]       VARCHAR (50) NULL,
     [tipo]              VARCHAR (30) NOT NULL,
-    [autor]             VARCHAR (30) NOT NULL,
     [fechaIngreso]      DATETIME     NULL,
     [fechaModificacion] DATETIME     NULL,
     [imagen] VARCHAR(MAX) NULL, 
     [ruta] VARCHAR(MAX) NOT NULL, 
-    PRIMARY KEY CLUSTERED ([idMaterial] ASC)
+    propietario varchar(20) not null,
+    PRIMARY KEY CLUSTERED ([idMaterial] ASC),
+    CONSTRAINT FK_MaterialUsuario FOREIGN KEY (propietario) REFERENCES USUARIOS(nombreUsr)
 );
 
+GO
+
+CREATE TABLE MATERIAL_AUTOR(
+	idMaterial VARCHAR(10),
+	codigo INT,
+	PRIMARY KEY (idMaterial, idArea),
+	CONSTRAINT FK_AutorMaterial FOREIGN KEY(idMaterial) REFERENCES MATERIAL(idMaterial),
+	CONSTRAINT FK_MaterialAutor FOREIGN KEY(codigo) REFERENCES AUTORES(codigo)
+);
+
+GO
+
+CREATE TABLE MATERIAL_AREA(
+	idMaterial VARCHAR(10),
+	idArea VARCHAR(10),
+	PRIMARY KEY (idMaterial, idArea),
+	CONSTRAINT FK_MaterialArea FOREIGN KEY (idMaterial) REFERENCES MATERIAL(idMaterial),
+	CONSTRAINT FK_AreaMaterial FOREIGN KEY (idArea) REFERENCES MATERIAL(idArea)
+);
+
+GO
+
+CREATE TABLE MSJERROR(
+mensaje VERCHAR(MAX) NOT NULL
+);
+
+GO
 
 
---CREATE PROCEDURE [dbo].[procInsertArea]
---@idArea varchar(10),
---@nombre varchar(50),
---@fkArea varchar(10)
---AS
---BEGIN TRANSACTION 
---     BEGIN TRY 
---	 INSERT INTO AREA(idArea,nombre,fkArea)
---	 VALUES(@idArea,@nombre,@fkArea)
---	 COMMIT TRANSACTION
---	 END TRY
---	 BEGIN CATCH 
---	 ROLLBACK TRANSACTION
---	 INSERT INTO msjError (mensaje)
---	 values (ERROR_MESSAGE())
---	 END CATCH
+--CREATE PROCEDURE procInsertArea
+@idArea varchar(10),
+@nombre varchar(50),
+@fkArea varchar(10)
+AS
+BEGIN TRANSACTION 
+     BEGIN TRY 
+		IF NOT EXISTS (SELECT idArea FROM AREA WHERE idArea = @idArea)
+		INSERT INTO AREA(idArea,nombre,fkArea) VALUES (@idArea,@nombre,@fkArea)
+		ELSE
+		INSERT INTO MSJERROR(mensaje) VALUES ('this area already exists')
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH 
+		ROLLBACK TRANSACTION
+		INSERT INTO MSJERROR (mensaje)
+		values (ERROR_MESSAGE())
+	END CATCH
+
+GO
 
 --Modificar Area
-CREATE PROCEDURE [dbo].[procModificarArea]
-	@idArea varchar(10),
-	@nombre varchar(50),
-	@fkArea varchar(10)
-AS
 BEGIN TRANSACTION
 	BEGIN TRY
 		UPDATE AREA SET nombre = @nombre, fkArea = @fkArea WHERE idArea = @idArea;
@@ -105,33 +135,29 @@ END CATCH
 
 --------------------------------###------------------------------------------
 
---Crear Autor
-CREATE PROCEDURE [dbo].[procInsertAutor]
-@codigo int,
-@nombre varchar(50)
+-- Consultar Autor
+CREATE PROCEDURE [dbo].[procConsultarAutor]
+	@codigo int
 
 AS
-BEGIN TRANSACTION 
-     BEGIN TRY 
-		INSERT INTO AUTORES(codigo, nombre)
-		VALUES(@codigo, @nombre)
-		COMMIT TRANSACTION
-	 END TRY
-	 BEGIN CATCH 
-		ROLLBACK TRANSACTION
-		INSERT INTO MSJERROR (mensaje)
-		values (ERROR_MESSAGE())
-	 END CATCH
+BEGIN TRANSACTION
+	BEGIN TRY 
+		SELECT codigo, nombre FROM AUTORES WHERE codigo=@codigo;
+		COMMIT TRANSACTION 
+	END TRY 
+	BEGIN CATCH 
+		ROLLBACK TRANSACTION 
+		INSERT INTO MSJERROR values (ERROR_MESSAGE())
+	END CATCH
 
 --Modificar Autor
-CREATE PROCEDURE [dbo].[procModificarArea]
-	@idArea varchar(10),
-	@nombre varchar(50),
-	@fkArea varchar(10)
+CREATE PROCEDURE [dbo].[procModificarAutor]
+	@codigo int,
+	@nombre varchar(50)
 AS
 BEGIN TRANSACTION
 	BEGIN TRY
-		UPDATE AREA SET nombre = @nombre, fkArea = @fkArea WHERE idArea = @idArea;
+		UPDATE AUTORES SET nombre = @nombre WHERE codigo = @codigo;
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH

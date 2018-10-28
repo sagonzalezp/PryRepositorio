@@ -7,19 +7,52 @@ namespace PryRepositorio.Modelo
 {
     public class Usuario
     {
-        String nombreUsr;
-        String contrasena;
-        String tipo;
+        String nombre ;
+        String contrasena ;
+        String tipo ;
 
-        public Usuario(string nombreUsr, string contrasena, string tipo)
+        
+
+        public Usuario()
         {
-            this.nombreUsr = nombreUsr;
+            this.NombreU = "";
+            this.contrasena = "";
+            this.tipo = "";
+        }
+
+        public Usuario(String NombreUsr, String contrasena, String tipo)
+        {
+            this.NombreU = NombreUsr;
             this.contrasena = contrasena;
             this.tipo = tipo;
         }
 
-        public string NombreUsr { get => nombreUsr; set => nombreUsr = value; }
+        public string NombreU { get => nombre; set => nombre = value; }
         public string Contrasena { get => contrasena; set => contrasena = value; }
         public string Tipo { get => tipo; set => tipo = value; }
-    }
+
+
+        /***********Actions *************/
+
+        public Boolean IniciarSesion()
+        {
+            Controlador.ControlLogin controller = new Controlador.ControlLogin();
+            return controller.IniciarSesion();
+        }
+
+        public Boolean ValidarUsuario()
+        {
+            Controlador.ControlLogin controller = new Controlador.ControlLogin();
+            return controller.ValidarUsuario();
+        }
+
+        public Boolean RegistrarUsuario()
+        {
+            Controlador.ControlLogin controller = new Controlador.ControlLogin();
+            return controller.Registrar();
+        }
+
+
+       
+}
 }

@@ -58,14 +58,16 @@
             <tr>
                 <td class="auto-style1">NOMBRE</td>
                 <td class="auto-style6">
-                    <asp:TextBox ID="txtNombre" runat="server" Width="532px"></asp:TextBox>
+                    <asp:TextBox ID="txtNombre" runat="server" Width="525px"></asp:TextBox>
                 </td>
             </tr>
             <tr>
                 <td class="auto-style1">FK ID AREA</td>
                 <td class="auto-style6">
-                    <asp:TextBox ID="txtFkarea" runat="server" Width="527px"></asp:TextBox>
-                </td>
+                <asp:DropDownList ID="dropFkarea" runat="server" DataSourceID="SqlDataSource1" DataTextField="nombre" DataValueField="idArea">
+                    </asp:DropDownList>
+                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [nombre], [idArea] FROM [AREA]"></asp:SqlDataSource>   
+				</td>
             </tr>
         </table>
         <table style="width: 100%;">
