@@ -116,20 +116,25 @@ namespace PryRepositorio
 
         protected void btnConsultar_Click(object sender, EventArgs e)
         {
-            try {
-            
-            Material objMaterial = new Material();
-            objMaterial.IdMaterial = txtIdmaterial.Text;
-            controlMaterial objControl = new controlMaterial(objMaterial);
-            DataSet DS = objControl.Consultar();
+            try
+            {
 
-            txtTitulomaterial.Text = DS.Tables[0].Rows[0][1].ToString();
-            txtDescripcion.Text = DS.Tables[0].Rows[0][2].ToString();
-            txtTipomaterial.Text = DS.Tables[0].Rows[0][3].ToString();
-            labelFechaIngreso.Text = DS.Tables[0].Rows[0][4].ToString();
-            labelFechaModificacion.Text = DS.Tables[0].Rows[0][5].ToString();
-            txtPropietario.Text = DS.Tables[0].Rows[0][8].ToString();
-            
+                Material objMaterial = new Material();
+                objMaterial.IdMaterial = txtIdmaterial.Text;
+                controlMaterial objControl = new controlMaterial(objMaterial);
+                DataSet DS = objControl.Consultar();
+
+                txtTitulomaterial.Text = DS.Tables[0].Rows[0][1].ToString();
+                txtDescripcion.Text = DS.Tables[0].Rows[0][2].ToString();
+                txtTipomaterial.Text = DS.Tables[0].Rows[0][3].ToString();
+                labelFechaIngreso.Text = DS.Tables[0].Rows[0][4].ToString();
+                labelFechaModificacion.Text = DS.Tables[0].Rows[0][5].ToString();
+                txtPropietario.Text = DS.Tables[0].Rows[0][8].ToString();
+
+                for(int i = 0; i < DS.Tables[1].Rows.Count; i++)
+                {
+                    listBoxArea.Items.Add(DS.Tables[1].Rows[0][0].ToString());
+                }
             }
             catch(Exception Exc)
             {

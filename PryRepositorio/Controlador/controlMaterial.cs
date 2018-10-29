@@ -52,69 +52,161 @@ namespace PryRepositorio.Controlador
         public DataSet Consultar()
         {
             String mensaje;
-            DataSet objDs = new DataSet();
+            String comandoSql;
+            DataSet dataSet = new DataSet("Material");
+
             Conexion conexion = new Conexion();
             try
             {
-                //consultar material
-                SqlCommand cmd = new SqlCommand("procConsultarMaterial", conexion.Conex);
-                cmd.CommandType = CommandType.StoredProcedure;
+                //DataSet objDs = new DataSet("Material");
 
-                cmd.Parameters.Add("@idMaterial", SqlDbType.VarChar, 10);
-                cmd.Parameters["@idMaterial"].Value = material.IdMaterial;
+                //dataAdapter del Material
+                SqlDataAdapter daMaterial = new SqlDataAdapter();
+                daMaterial.TableMappings.Add("Table", "Material");
+
+                //dataAdapter de Areas
+                SqlDataAdapter daArea = new SqlDataAdapter();
+                daArea.TableMappings.Add("Table", "Area");
+
+                //dataAdapter de Audiencias
+                SqlDataAdapter daAudiencia = new SqlDataAdapter();
+                daAudiencia.TableMappings.Add("Table", "Audiencia");
+
+                //dataAdapter de Autores
+                SqlDataAdapter daAutor = new SqlDataAdapter();
+                daAutor.TableMappings.Add("Table", "Autor");
+
+                //dataAdapter de Formato
+                SqlDataAdapter daFormato = new SqlDataAdapter();
+                daFormato.TableMappings.Add("Table", "Formato");
+
+                //dataAdapter de Keyword
+                SqlDataAdapter daKeyword = new SqlDataAdapter();
+                daKeyword.TableMappings.Add("Table", "Keyword");
+
+                //dataAdapter de Lenguaje
+                SqlDataAdapter daLenguaje= new SqlDataAdapter();
+                daLenguaje.TableMappings.Add("Table", "Lenguaje");
+
+
+                //abrir la conexion
                 conexion.Conex.Open();
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(objDs);
+                Console.WriteLine("The SqlConnection is open.");
 
-                //consultar Areas
-                cmd = new SqlCommand("procConsultarAreasXMaterial", conexion.Conex);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@idMaterial", SqlDbType.VarChar, 10);
-                cmd.Parameters["@idMaterial"].Value = material.IdMaterial;
-                da = new SqlDataAdapter(cmd);
-                da.Fill(objDs);
+                //configurar el comando Sql para Material
+                comandoSql = String.Format("EXEC procConsultarMaterial '{0}'", this.material.IdMaterial);
+                SqlCommand command = new SqlCommand(comandoSql,conexion.Conex);
+                daMaterial.SelectCommand = command;
+                //llenar el dataSet
+                daMaterial.Fill(dataSet);
 
-                //consultar Audiencia
-                cmd = new SqlCommand("procConsultarAudienciaXMaterial", conexion.Conex);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@idMaterial", SqlDbType.VarChar, 10);
-                cmd.Parameters["@idMaterial"].Value = material.IdMaterial;
-                da = new SqlDataAdapter(cmd);
-                da.Fill(objDs);
 
-                //consultar Autores
-                cmd = new SqlCommand("procConsultarAutorXMaterial", conexion.Conex);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@idMaterial", SqlDbType.VarChar, 10);
-                cmd.Parameters["@idMaterial"].Value = material.IdMaterial;
-                da = new SqlDataAdapter(cmd);
-                da.Fill(objDs);
+                //modificar la consulta para las areas
+                comandoSql = String.Format("EXEC procConsultarAreasXMaterial '{0}'", this.material.IdMaterial);
+                command = new SqlCommand(comandoSql, conexion.Conex);
+                daArea.SelectCommand = command;
+                //llenar el DataSet
+                daArea.Fill(dataSet);
 
-                //consultar Formatos
-                cmd = new SqlCommand("procConsultarFormatoXMaterial", conexion.Conex);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@idMaterial", SqlDbType.VarChar, 10);
-                cmd.Parameters["@idMaterial"].Value = material.IdMaterial;
-                da = new SqlDataAdapter(cmd);
-                da.Fill(objDs);
+                //modificar la consulta para las Audiencias
+                comandoSql = String.Format("EXEC procConsultarAudienciaXMaterial '{0}'", this.material.IdMaterial);
+                command = new SqlCommand(comandoSql, conexion.Conex);
+                daAudiencia.SelectCommand = command;
+                //llenar el DataSet
+                daAudiencia.Fill(dataSet);
 
-                //consultar Keywords
-                cmd = new SqlCommand("procConsultarKeywordXMaterial", conexion.Conex);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@idMaterial", SqlDbType.VarChar, 10);
-                cmd.Parameters["@idMaterial"].Value = material.IdMaterial;
-                da = new SqlDataAdapter(cmd);
-                da.Fill(objDs);
+                //modificar la consulta para los Autores
+                comandoSql = String.Format("EXEC procConsultarAutorXMaterial '{0}'", this.material.IdMaterial);
+                command = new SqlCommand(comandoSql, conexion.Conex);
+                daAutor.SelectCommand = command;
+                //llenar el DataSet
+                daAutor.Fill(dataSet);
 
-                // consultar Lenguajes
-                cmd = new SqlCommand("procConsultarLenguajeXMaterial", conexion.Conex);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@idMaterial", SqlDbType.VarChar, 10);
-                cmd.Parameters["@idMaterial"].Value = material.IdMaterial;
-                da = new SqlDataAdapter(cmd);
-                da.Fill(objDs);
+                //modificar la consulta para los Formatos
+                comandoSql = String.Format("EXEC procConsultarFormatoXMaterial '{0}'", this.material.IdMaterial);
+                command = new SqlCommand(comandoSql, conexion.Conex);
+                daFormato.SelectCommand = command;
+                //llenar el DataSet
+                daFormato.Fill(dataSet);
 
+                //modificar la consulta para las Keyword
+                comandoSql = String.Format("EXEC procConsultarKeywordXMaterial '{0}'", this.material.IdMaterial);
+                command = new SqlCommand(comandoSql, conexion.Conex);
+                daKeyword.SelectCommand = command;
+                //llenar el DataSet
+                daKeyword.Fill(dataSet);
+
+                //modificar la consulta para los Lenguajes
+                comandoSql = String.Format("EXEC procConsultarLenguajeXMaterial '{0}'", this.material.IdMaterial);
+                command = new SqlCommand(comandoSql, conexion.Conex);
+                daLenguaje.SelectCommand = command;
+                //llenar el DataSet
+                daLenguaje.Fill(dataSet);
+
+
+                //cerrar conexion
                 conexion.Conex.Close();
+                Console.WriteLine("The SqlConnection is closed.");
+
+                //    //consultar material
+                //    SqlCommand cmd = new SqlCommand("procConsultarMaterial", conexion.Conex);
+                //    cmd.CommandType = CommandType.StoredProcedure;
+
+                //    cmd.Parameters.Add("@idMaterial", SqlDbType.VarChar, 10);
+                //    cmd.Parameters["@idMaterial"].Value = material.IdMaterial;
+                //    conexion.Conex.Open();
+                //    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                //    da.Fill(objDs);
+
+                //    //consultar Areas
+                //    cmd = new SqlCommand("procConsultarAreasXMaterial", conexion.Conex);
+                //    cmd.CommandType = CommandType.StoredProcedure;
+                //    cmd.Parameters.Add("@idMaterial", SqlDbType.VarChar, 10);
+                //    cmd.Parameters["@idMaterial"].Value = material.IdMaterial;
+                //    da = new SqlDataAdapter(cmd);
+                //    da.Fill(objDs);
+
+                //    //consultar Audiencia
+                //    cmd = new SqlCommand("procConsultarAudienciaXMaterial", conexion.Conex);
+                //    cmd.CommandType = CommandType.StoredProcedure;
+                //    cmd.Parameters.Add("@idMaterial", SqlDbType.VarChar, 10);
+                //    cmd.Parameters["@idMaterial"].Value = material.IdMaterial;
+                //    da = new SqlDataAdapter(cmd);
+                //    da.Fill(objDs);
+
+                //    //consultar Autores
+                //    cmd = new SqlCommand("procConsultarAutorXMaterial", conexion.Conex);
+                //    cmd.CommandType = CommandType.StoredProcedure;
+                //    cmd.Parameters.Add("@idMaterial", SqlDbType.VarChar, 10);
+                //    cmd.Parameters["@idMaterial"].Value = material.IdMaterial;
+                //    da = new SqlDataAdapter(cmd);
+                //    da.Fill(objDs);
+
+                //    //consultar Formatos
+                //    cmd = new SqlCommand("procConsultarFormatoXMaterial", conexion.Conex);
+                //    cmd.CommandType = CommandType.StoredProcedure;
+                //    cmd.Parameters.Add("@idMaterial", SqlDbType.VarChar, 10);
+                //    cmd.Parameters["@idMaterial"].Value = material.IdMaterial;
+                //    da = new SqlDataAdapter(cmd);
+                //    da.Fill(objDs);
+
+                //    //consultar Keywords
+                //    cmd = new SqlCommand("procConsultarKeywordXMaterial", conexion.Conex);
+                //    cmd.CommandType = CommandType.StoredProcedure;
+                //    cmd.Parameters.Add("@idMaterial", SqlDbType.VarChar, 10);
+                //    cmd.Parameters["@idMaterial"].Value = material.IdMaterial;
+                //    da = new SqlDataAdapter(cmd);
+                //    da.Fill(objDs);
+
+                //    // consultar Lenguajes
+                //    cmd = new SqlCommand("procConsultarLenguajeXMaterial", conexion.Conex);
+                //    cmd.CommandType = CommandType.StoredProcedure;
+                //    cmd.Parameters.Add("@idMaterial", SqlDbType.VarChar, 10);
+                //    cmd.Parameters["@idMaterial"].Value = material.IdMaterial;
+                //    da = new SqlDataAdapter(cmd);
+                //    da.Fill(objDs);
+
+                //    conexion.Conex.Close();
 
 
             }
@@ -123,7 +215,7 @@ namespace PryRepositorio.Controlador
                 mensaje = objExc.Message;
             }
 
-            return objDs;
+            return dataSet;
         }
 
 
