@@ -131,9 +131,42 @@ namespace PryRepositorio
                 labelFechaModificacion.Text = DS.Tables[0].Rows[0][5].ToString();
                 txtPropietario.Text = DS.Tables[0].Rows[0][8].ToString();
 
-                for(int i = 0; i < DS.Tables[1].Rows.Count; i++)
+                //Limpiar las listas de petadatos
+                listBoxArea.Items.Clear();
+                listBoxAudiencia.Items.Clear();
+                listBoxAutor.Items.Clear();
+                listBoxFormato.Items.Clear();
+                listBoxKeyword.Items.Clear();
+                listBoxLenguaje.Items.Clear();
+
+                for (int i = 0; i < DS.Tables[1].Rows.Count; i++)
                 {
-                    listBoxArea.Items.Add(DS.Tables[1].Rows[0][0].ToString());
+                    listBoxArea.Items.Add(DS.Tables[1].Rows[i][0].ToString());
+                }
+
+                for(int i = 0; i < DS.Tables[2].Rows.Count; i++)
+                {
+                    listBoxAudiencia.Items.Add(DS.Tables[2].Rows[i][0].ToString());
+                }
+
+                for(int i = 0; i < DS.Tables[3].Rows.Count; i++)
+                {
+                    listBoxAutor.Items.Add(DS.Tables[3].Rows[i][0].ToString());
+                }
+
+                for(int i = 0; i < DS.Tables[4].Rows.Count; i++)
+                {
+                    listBoxFormato.Items.Add(DS.Tables[4].Rows[i][0].ToString());
+                }
+
+                for(int i = 0; i < DS.Tables[5].Rows.Count; i++)
+                {
+                    listBoxKeyword.Items.Add(DS.Tables[5].Rows[i][0].ToString());
+                }
+
+                for(int i = 0; i < DS.Tables[6].Rows.Count; i++)
+                {
+                    listBoxLenguaje.Items.Add(DS.Tables[6].Rows[i][0].ToString());
                 }
             }
             catch(Exception Exc)
