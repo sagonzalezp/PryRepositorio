@@ -187,7 +187,7 @@
             <tr>
                 <td class="auto-style1">COSTO</td>
 			    <td class="auto-style6">
-                    <asp:TextBox ID="txtCosto" runat="server" Width="532px" OnTextChanged="txtCosto_TextChanged" TextMode="Number"></asp:TextBox>
+                    <asp:TextBox ID="txtCosto" runat="server" Width="532px" OnTextChanged="txtCosto_TextChanged"></asp:TextBox>
                 </td>
             </tr>
 			<tr>
